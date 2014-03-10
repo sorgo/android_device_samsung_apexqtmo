@@ -1,2 +1,2 @@
-add_lunch_combo carbon_apexqtmo-eng
-add_lunch_combo carbon_apexqtmo-userdebug
+add_lunch_combo slim_apexqtmo-eng
+add_lunch_combo slim_apexqtmo-userdebug
