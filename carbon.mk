@@ -1,12 +1,23 @@
-$(call inherit-product, device/samsung/apexqtmo/full_apexqtmo.mk)
+# Check for target product
+ifeq (pac_apexqtmo,$(TARGET_PRODUCT))
 
-$(call inherit-product, vendor/carbon/config/common_gsm.mk)
+# OVERLAY_TARGET adds overlay asset source
+OVERLAY_TARGET := pa_xhdpi
 
-$(call inherit-product, vendor/carbon/config/common_phone.mk)
+# PAC boot logo
+PRODUCT_COPY_FILES += \
+    vendor/pac/prebuilt/common/bootlogo/pac_logo_720x1280.rle:root/logo.rle
 
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=apexqtmo TARGET_DEVICE=apexqtmo BUILD_FINGERPRINT="samsung/apexqtmo/apexqtmo:4.1.2/JZO54K/T699UVBMC5:user/release-keys" PRIVATE_BUILD_DESC="apexqtmo-user 4.1.2 JZO54K T699UVBMC5 release-keys"
+# Copy bootanimation
+PRODUCT_COPY_FILES += \
+    vendor/pac/prebuilt/720x1280/bootanimation.zip:system/media/bootanimation.zip
 
+# include PAC common configuration
+include vendor/pac/config/pac_common.mk
 
-PRODUCT_NAME := carbon_apexqtmo
-PRODUCT_DEVICE := apexqtmo
+# Inherit CM device configuration
+$(call inherit-product, device/samsung/apexqtmo/cm.mk)
 
+PRODUCT_NAME := pac_apexqtmo
+
+endif
